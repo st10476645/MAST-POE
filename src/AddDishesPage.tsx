@@ -1,6 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View,ScrollView,TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View,ScrollView,TouchableOpacity,TextInput, Button } from 'react-native';
+
+
 
 
 export default function AddDishesPage({ navigation }: { navigation: any }) {
@@ -11,7 +13,17 @@ const  [coursesFilter, setcoursesFilter] = useState(false); // State to manage c
 const togglecoursesFilter = () => {
     setcoursesFilter(!coursesFilter); // This changes the state from true to false and vice versa
 };
+// State to manage dishes input
+const [Dishname, setDishname] = useState('');
+const [DishDescription , setDishDescription] = useState(''); 
+const [DishPrice , setPrice] = useState(''); 
 
+// Function to handle adding dish (you can expand this to actually save the dish)
+const handleAdding = () => {
+    console.log('Dish added:') 
+    // Need to add the array logic here to store the dishes 
+    
+}
 
 
     return (
@@ -26,12 +38,36 @@ const togglecoursesFilter = () => {
             <Text>{coursesFilter ?"▼" : "►"}</Text> {/* Arrow changes based on state */}
        </TouchableOpacity>
          {coursesFilter && ( 
-              <View>
-                <Text>Starters</Text>
-                <Text>Main Course</Text>
-                <Text>Desserts</Text>
+              <View> {/* Button that should make the user enter the dish for each filter */}
+                <TouchableOpacity>Starters</TouchableOpacity>
+                <TouchableOpacity>Main Course</TouchableOpacity>
+                <TouchableOpacity>Desserts</TouchableOpacity>
               </View>
          )}
+     <TextInput
+         style={styles.input}
+         placeholder="Dish Name"
+         onChangeText={newText => setDishname(newText)}
+          keyboardType="default"
+     />
+     <TextInput
+          style={styles.input}
+          placeholder="Dish Description"
+          onChangeText={newText=> setDishDescription(newText)}
+          keyboardType="default"
+     />
+     <TextInput
+            style={styles.input}
+            placeholder= "Dish Price"
+            onChangeText={newText => setPrice(newText)}
+            keyboardType="numeric"
+     />
+     <Button title="Add to menu" onPress={handleAdding} />
+
+
+
+
+        
            
     </View>
 </ScrollView>
@@ -54,5 +90,12 @@ const styles = StyleSheet.create({
   FilterbuttonText: {
     color: "#fff",
     fontSize: 18,
-  }
+  },
+  input: {
+    borderWidth: 1,
+    borderColor:"#004aad",
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
+  }, 
 });
