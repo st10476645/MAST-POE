@@ -21,7 +21,9 @@ export default function App() {
     <ScrollView>
     <View style={styles.container}>
       <Text style={styles.WelcomeText}>Welcome Christofell, let's plan together a well-balanced meal.</Text>
-      <TouchableOpacity style={styles.AddDishButton}>Fill the dish info</TouchableOpacity>
+      <TouchableOpacity style={styles.AddDishesPagebutton}>
+        <Text style={styles.FillDishestext}>Fill the dish info</Text> 
+      </TouchableOpacity> 
       <StatusBar style="auto" />
     </View>
     </ScrollView>
@@ -40,11 +42,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     margin: 10,
     textAlign: 'center',
+    padding: 30, 
   },
-  AddDishButton: {
+  AddDishesPagebutton: {
     backgroundColor: "#004aad",
-    padding: 20,
-    borderRadius: 5,
+    padding: 18,  
+    borderRadius: 30,
     marginTop: 20,
   },
+  FillDishestext: { 
+    color:"white",
+    fontSize: 14,
+    textAlign: 'center',
+  }, 
 });
