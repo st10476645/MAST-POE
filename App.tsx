@@ -2,10 +2,15 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from "@react-navigation/native"; 
+import {StackNavigatorProps}  from '@react-navigation/stack';
 
 import  AddDishesPage  from './src/AddDishesPage'; 
 
+
+
 const Stack = createStackNavigator();
+
+type RootStackParamList ={ App: undefined; AddDishesPage:undefined;}// Probably nned string and int but not sure yet 
 
 
 export default function App() {
@@ -23,7 +28,8 @@ export default function App() {
       <Text style={styles.WelcomeText}>Welcome Christofell, let's plan together a well-balanced meal.</Text>
       <TouchableOpacity style={styles.AddDishesPagebutton}>
         <Text style={styles.FillDishestext}>Fill the dish info</Text> 
-      </TouchableOpacity> 
+      </TouchableOpacity>  
+      
       <StatusBar style="auto" />
     </View>
     </ScrollView>
