@@ -1,11 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
+import React, { useState } from 'react'; 
 import { StyleSheet, Text, View,ScrollView,TouchableOpacity,TextInput, Button } from 'react-native';
 
 
-
-
 export default function AddDishesPage({ navigation }: { navigation: any }) {
+
 
 const  [coursesFilter, setcoursesFilter] = useState(false); // State to manage course filter visibility
 
@@ -14,9 +13,9 @@ const togglecoursesFilter = () => {
     setcoursesFilter(!coursesFilter); // This changes the state from true to false and vice versa
 };
 // State to manage dishes input
-const [Dishname, setDishname] = useState('');
-const [DishDescription , setDishDescription] = useState(''); 
-const [DishPrice , setPrice] = useState(''); 
+const [Dishname, setDishname] = React.useState('');
+const [DishDescription , setDishDescription] = React.useState(''); 
+const [DishPrice , setPrice] = React.useState(''); 
 
 // Function to handle adding dish (you can expand this to actually save the dish)
 const handleAdding = () => {
@@ -24,6 +23,8 @@ const handleAdding = () => {
     // Need to add the array logic here to store the dishes 
     
 }
+
+
 
 
     return (

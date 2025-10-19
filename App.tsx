@@ -1,4 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from "@react-navigation/native"; 
@@ -6,11 +7,19 @@ import {StackNavigatorProps}  from '@react-navigation/stack';
 
 import  AddDishesPage  from './src/AddDishesPage'; 
 
+const [coursesFilter, setcoursesFilter] = useState(false);
 
+// Function to toggle course filter visibility
+const togglecoursesFilter = () => {
+    setcoursesFilter(!coursesFilter); // This changes the state from true to false and vice versa
+};
 
 const Stack = createStackNavigator();
 
-type RootStackParamList ={ App: undefined; AddDishesPage:undefined;}// Probably nned string and int but not sure yet 
+type RootStackParamList ={ 
+  App: undefined;
+  AddDishesPage: {Dishname: string; DishDescription: string; DishPrice: number;};
+}// Probably need string and int but not sure yet 
 
 
 export default function App() {
@@ -27,8 +36,23 @@ export default function App() {
     <View style={styles.container}>
       <Text style={styles.WelcomeText}>Welcome Christofell, let's plan together a well-balanced meal.</Text>
       <TouchableOpacity style={styles.AddDishesPagebutton}>
-        <Text style={styles.FillDishestext}>Fill the dish info</Text> 
-      </TouchableOpacity>  
+        <Text style={styles.FillDishestext}>Fill the dish info</Text>
+      </TouchableOpacity>
+      <Text>Below choose the course type to display the added dishes</Text>
+      <TouchableOpacity
+              style={styles.Filterbutton} 
+                onPress={togglecoursesFilter}>
+                  <Text style={styles.FilterbuttonText}>Filter</Text>
+                  <Text>{coursesFilter ?"▼" : "►"}</Text> {/* Arrow changes based on state */}
+      </TouchableOpacity>
+               {coursesFilter && ( 
+                    <View> {/* Button that should make the user enter the dish for each filter */}
+                      <TouchableOpacity>Starters</TouchableOpacity>
+                      <TouchableOpacity>Main Course</TouchableOpacity>
+                      <TouchableOpacity>Desserts</TouchableOpacity>
+                    </View>
+               )}
+
       
       <StatusBar style="auto" />
     </View>
@@ -61,4 +85,14 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
   }, 
+    Filterbutton: { 
+    backgroundColor: "#004aad",
+    padding: 15,
+    borderRadius: 5,
+    marginTop: 20,
+  },
+  FilterbuttonText: {
+    color: "#fff",
+    fontSize: 18,
+  },
 });
