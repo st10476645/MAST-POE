@@ -7,7 +7,12 @@ import {StackNavigatorProps}  from '@react-navigation/stack';
 
 import  AddDishesPage  from './src/AddDishesPage'; 
 
-const [coursesFilter, setcoursesFilter] = useState(false);
+
+
+export default function App() {
+
+
+  const [coursesFilter, setcoursesFilter] = useState(false);
 
 // Function to toggle course filter visibility
 const togglecoursesFilter = () => {
@@ -21,8 +26,6 @@ type RootStackParamList ={
   AddDishesPage: {Dishname: string; DishDescription: string; DishPrice: number;};
 }// Probably need string and int but not sure yet 
 
-
-export default function App() {
 
   <NavigationContainer >
       <Stack.Navigator>
@@ -43,7 +46,7 @@ export default function App() {
               style={styles.Filterbutton} 
                 onPress={togglecoursesFilter}>
                   <Text style={styles.FilterbuttonText}>Filter</Text>
-                  <Text>{coursesFilter ?"▼" : "►"}</Text> {/* Arrow changes based on state */}
+                  <Text style={styles.arrow}>{coursesFilter ?"▼" : "►"}</Text> {/* Arrow changes based on state */}
       </TouchableOpacity>
                {coursesFilter && ( 
                     <View> {/* Button that should make the user enter the dish for each filter */}
@@ -85,12 +88,17 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
   }, 
-    Filterbutton: { 
+   Filterbutton: { 
     backgroundColor: "#004aad",
     padding: 15,
     borderRadius: 5,
     marginTop: 20,
   },
+   
+  arrow: { 
+    fontSize: 18,
+    color: "white",
+  }, 
   FilterbuttonText: {
     color: "#fff",
     fontSize: 18,
