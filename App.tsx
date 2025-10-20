@@ -3,16 +3,44 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Button, TextInput } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from "@react-navigation/native";
-import { StackNavigatorProps } from '@react-navigation/stack';
+//import { StackNavigatorProps } from '@react-navigation/stack';
 
 import AddDishesPage from './src/AddDishesPage';
 import FilteredMenuPage from './src/FilteredMenuPage';
+import { Modal } from 'react-native/types_generated/index';
 
 
 
 
 export default function App() {
 
+  const [Dishes, setDishes] = useState<Array<{name: String; description: String; price: number}>>([]); 
+
+  const [NewName, setNewName] = useState('');
+  const [NewDescription, setNewDescription] = useState('');
+  const {NewPrice, setNewPrice} = useState('');
+
+  // State to manage modal visibility.(false = pop up closed, true = pop up open)
+  const [modalVisible, setModalVisible] = React.useState(false); 
+
+  const closeModal = () => {
+    setModalVisible(false);
+     setNewName("");
+     setNewDescription("");
+     setNewPrice("");
+  }; 
+
+  const addDish = () => { 
+    if (NewName && NewDescription && NewPrice) {
+      setDishes ([...Dishes, {name: NewName, description: NewDescription, price: parseFloat(NewPrice)}]);
+      setNewName(""); 
+      setNewDescription("");
+      setNewPrice("");
+      setModalVisible(false);
+    }
+  }; 
+  
+  
 
   const [coursesFilter, setcoursesFilter] = useState(false);
 
@@ -37,7 +65,7 @@ export default function App() {
   type RootStackParamList = {
     App: undefined;
     AddDishesPage: { Dishname: string; DishDescription: string; DishPrice: number; };
-  }// Probably need string and int but not sure yet 
+  }
 
 
   <NavigationContainer >
@@ -49,53 +77,20 @@ export default function App() {
 
   return (
 
-
-
-
-
     <ScrollView>
       <View style={styles.container}>
-        <Text style={styles.WelcomeText}>Welcome Christofell, let's plan together a well-balanced meal.</Text>
+        <Text> Click down below to add the dishes</Text>
+        <Button title='Add Dish' onPress={() => setModalVisible(true)}/>
 
-       
+        <Modal visible={modalVisible} onRequestClose={closeModal}>
+          
+          
+          </Modal>  
 
-        <TouchableOpacity
-          style={styles.Filterbutton}
-          onPress={togglecoursesFilter}>
-          <Text style={styles.FilterbuttonText}>Filter</Text>
-          <Text style={styles.arrow}>{coursesFilter ? "▼" : "►"}</Text> {/* Arrow changes based on state */}
-          {coursesFilter && (
-            <View>
-              {/* <TouchableOpacity>Main Course</TouchableOpacity>
-              <TouchableOpacity>Desserts</TouchableOpacity> */}
-              <Button title="Starters" onPress={() => { }} />
-              <Button title="Main Course" onPress={() => { }} />
-              <Button title="Desserts" onPress={() => { }} /> 
-            </View>
-          )}
-        </TouchableOpacity>
+
       </View>  
-
-
-        <TextInput
-          style={styles.input}
-          placeholder="Dish Name"
-          onChangeText={newText => setDishname(newText)}
-          keyboardType="default"
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Dish Description"
-          onChangeText={newText => setDishDescription(newText)}
-          keyboardType="default"
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Dish Price"
-          onChangeText={newText => setPrice(newText)}
-          keyboardType="numeric"
-        />
-        <Button title="Add to menu" onPress={handleAdding} />
+       
+       
 
 
 
