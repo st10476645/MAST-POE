@@ -33,42 +33,43 @@ const handleAdding = () => {
     <View>
        <Text>Choose a course type a fill the dish details below.</Text>
        <TouchableOpacity
-        style={styles.Filterbutton} 
-          onPress={togglecoursesFilter}>
-            <Text style={styles.FilterbuttonText}>Filter</Text>
-            <Text>{coursesFilter ?"▼" : "►"}</Text> {/* Arrow changes based on state */}
-       </TouchableOpacity>
-         {coursesFilter && ( 
-              <View> {/* Button that should make the user enter the dish for each filter */}
-                <TouchableOpacity>Starters</TouchableOpacity>
-                <TouchableOpacity>Main Course</TouchableOpacity>
-                <TouchableOpacity>Desserts</TouchableOpacity>
-              </View>
-         )}
-     <TextInput
-         style={styles.input}
-         placeholder="Dish Name"
-         onChangeText={newText => setDishname(newText)}
-          keyboardType="default"
-     />
-     <TextInput
-          style={styles.input}
-          placeholder="Dish Description"
-          onChangeText={newText=> setDishDescription(newText)}
-          keyboardType="default"
-     />
-     <TextInput
-            style={styles.input}
-            placeholder= "Dish Price"
-            onChangeText={newText => setPrice(newText)}
-            keyboardType="numeric"
-     />
-     <Button title="Add to menu" onPress={handleAdding} />
-
-
-
-
-        
+                style={styles.Filterbutton}
+                onPress={togglecoursesFilter}>
+                <Text style={styles.FilterbuttonText}>Filter</Text>
+                <Text style={styles.arrow}>{coursesFilter ? "▼" : "►"}</Text> {/* Arrow changes based on state */}
+                {coursesFilter && (
+                  <View>
+                    {/* <TouchableOpacity>Main Course</TouchableOpacity>
+                    <TouchableOpacity>Desserts</TouchableOpacity> */}
+                    <Button title="Starters" onPress={() => { }} />
+                    <Button title="Main Course" onPress={() => { }} />
+                    <Button title="Desserts" onPress={() => { }} /> 
+                  </View>
+                )}
+              </TouchableOpacity>
+            </View>  
+      
+      
+              <TextInput
+                style={styles.input}
+                placeholder="Dish Name"
+                onChangeText={newText => setDishname(newText)}
+                keyboardType="default"
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="Dish Description"
+                onChangeText={newText => setDishDescription(newText)}
+                keyboardType="default"
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="Dish Price"
+                onChangeText={newText => setPrice(newText)}
+                keyboardType="numeric"
+              />
+              <Button title="Add to menu" onPress={handleAdding} />
+    <View> 
            
     </View>
 </ScrollView>
@@ -91,6 +92,10 @@ const styles = StyleSheet.create({
   FilterbuttonText: {
     color: "#fff",
     fontSize: 18,
+  },
+   arrow: {
+    fontSize: 18,
+    color: "white",
   },
   input: {
     borderWidth: 1,
