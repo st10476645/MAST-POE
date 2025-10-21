@@ -27,6 +27,8 @@ Scan the QR code that appears with the Expo Go app on your phone
 
 # Youtbe link 
 
+https://youtube.com/shorts/AoIR6E3qTY0?si=xERhBStVgsMZf4fg
+
 # Additional screenshots of the app 
 <img width="783" height="1600" alt="image" src="https://github.com/user-attachments/assets/3e815d3e-f113-4955-9592-1447ca4300ed" />
 <img width="737" height="1600" alt="image" src="https://github.com/user-attachments/assets/8d48d39c-b7f8-4343-b1cf-a269642f0542" />
