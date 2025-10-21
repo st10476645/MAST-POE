@@ -14,11 +14,12 @@ import FilteredMenuPage from './src/FilteredMenuPage';
 
 export default function App() {
 
-  const [Dishes, setDishes] = useState<Array<{name: string; description: string; price: number}>>([]); 
+  const [Dishes, setDishes] = useState<Array<{name: string; description: string; price: number ;course:string}>>([]); 
 
   const [NewName, setNewName] = useState(''); 
   const [NewDescription, setNewDescription] = useState('');
   const [NewPrice, setNewPrice] = useState('');
+  const [NewCourse, setNewCourse] = useState('')
 
   // State to manage modal visibility.(false = pop up closed, true = pop up open)
   const [modalVisible, setModalVisible] = React.useState(false); 
@@ -28,11 +29,12 @@ export default function App() {
      setNewName("");
      setNewDescription("");
      setNewPrice("");
+     setNewCourse(""); 
   }; 
 
   const addDish = () => { 
     if (NewName && NewDescription && NewPrice) {
-      setDishes ([...Dishes, {name: NewName, description: NewDescription, price: parseFloat(NewPrice)}]);
+      setDishes ([...Dishes, {name: NewName, description: NewDescription, price: parseFloat(NewPrice), course:NewCourse}]);
       setNewName(""); 
       setNewDescription("");
       setNewPrice("");
@@ -40,7 +42,7 @@ export default function App() {
     }
   }; 
 
-  const [selectedDishes, setSelectedDishes] = useState<Array<{name: String; description: String; price: number}>>([]); // State to track selected dishes 
+  const [selectedDishes, setSelectedDishes] = useState<Array<{name: String; description: String; price: number;}>>([]); // State to track selected dishes 
 
   //Function to toggle the dish selection
   const toggleDishSelection = (dish: {name: string; description: string; price: number}) => { 
@@ -51,7 +53,7 @@ export default function App() {
     setSelectedDishes(prev => [...prev, dish]);
   }
 };
-
+  const courses = ["Starters", "Main course", "Dessert"]; 
   
 
 
@@ -68,7 +70,7 @@ export default function App() {
       <Stack.Screen name="AddDishesPage" component={AddDishesPage} />
       <Stack.Screen name="FilteredMenuPage" component={FilteredMenuPage} />
     </Stack.Navigator>
-  </NavigationContainer>
+  </NavigationContainer> 
 
   return (
 
@@ -104,6 +106,28 @@ export default function App() {
               keyboardType= "numeric" 
               />
 
+              <Text style={{fontWeight: 'bold', marginBottom: 10}}>Select course</Text>
+              <View style={styles.coursesButtonsContainer}>
+                {courses.map((course) =>{ 
+                  const isSelected = NewCourse === course;
+                  return(
+                    <TouchableOpacity
+                    key={course}
+                    onPress={() => setNewCourse(course)}
+                    style={[
+                      styles.coursesButton, 
+                      isSelected && styles.courseButtonSelected
+                    ]}
+                    >
+                      <Text style={isSelected ? styles.coursesButtonTextSelected : styles.courseButtonText}>
+                        {course}
+                      </Text>
+                    </TouchableOpacity>
+                  )
+
+                })} 
+              </View>
+
               <View style={styles.modalButtons}>
                 <Button title="Cancel" onPress={closeModal}/>
                 <Button title="Add Dish" onPress={addDish}/>
@@ -125,12 +149,13 @@ export default function App() {
     >
       <Text style={styles.dishName}>• {dish.name}</Text>
       <Text style={styles.dishDescription}>{dish.description}</Text>
-      <Text style={styles.dishPrice}>Price: ${dish.price.toFixed(2)}</Text>
+      <Text style={styles.dishPrice}>Price: R{dish.price.toFixed(2)}</Text> 
+      <Text style= {styles.dishCourse}>Course: {dish.course}</Text>
     </TouchableOpacity>
   );
 })}
 
-{/* ✅ Show total selected dishes at the bottom */}
+
 <Text style={{ fontWeight: 'bold', marginTop: 20 }}>
   Selected dishes: {selectedDishes.length}
 </Text>
@@ -207,7 +232,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   modalContent:{
-    width: 'auto',
+    width: '80%',
     padding: 20,
     backgroundColor: 'white',
     borderRadius: 10, 
@@ -222,6 +247,27 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
      
   }, 
+  coursesButtonsContainer:{
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginBottom: 15,
+  },
+  coursesButton: {
+  padding: 10,
+  borderRadius: 5,
+  borderWidth: 1,
+  borderColor: '#004aad',
+},
+courseButtonSelected: {
+  backgroundColor: '#004aad',
+},
+coursesButtonTextSelected: {
+  color: 'white'
+},
+courseButtonText: {
+  color: '#004aad',
+},
+
   dishItem: {
   padding: 15,
   marginVertical: 8,
@@ -230,7 +276,7 @@ const styles = StyleSheet.create({
   width: '90%',
 },
 selectedDishItem: {
-  backgroundColor: '#4CAF50',
+ backgroundColor:"#87CEEB", 
 },
 dishName: {
   fontWeight: 'bold',
@@ -244,6 +290,12 @@ dishPrice: {
   color: '#333',
   marginTop: 4,
 },
+dishCourse: {
+  color: '#004aad',
+  fontWeight: '600',
+  marginTop: 4,
+},
+
 
 }
 );
