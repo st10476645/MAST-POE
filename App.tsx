@@ -77,8 +77,15 @@ export default function App() {
     <ScrollView>
       <View style={styles.container}>
         <Text style={styles.WelcomeText}> Welcome, Christofell, let's plan together a well-balanced meal.</Text>
-        <Text> Click down below to add the dishes</Text>
-        <Button title='Add Dish' onPress={() => setModalVisible(true)}/>
+        <Text style={{ fontWeight: 'bold', marginTop: 20 }}> Click down below to add the dishes</Text> 
+
+        <TouchableOpacity style={styles.addDishButton}
+        onPress={() => setModalVisible(true)}>
+          <Text style={styles.addDishButtonText}>Add Dish</Text>
+        </TouchableOpacity> 
+
+        
+        
 
         <Modal visible={modalVisible} onRequestClose={closeModal}>
           <View style={styles.modalOverlay}>
@@ -129,8 +136,13 @@ export default function App() {
               </View>
 
               <View style={styles.modalButtons}>
-                <Button title="Cancel" onPress={closeModal}/>
-                <Button title="Add Dish" onPress={addDish}/>
+                <TouchableOpacity style={styles.cancelButton} onPress={closeModal}>
+                  <Text style={styles.cancelButtonText}>Cancel</Text> 
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.addDishButton} onPress={addDish}>
+                  <Text style={styles.addDishButtonText}>Add Dish</Text>
+                </TouchableOpacity>
+
               </View>
             </View>
           </View>
@@ -191,33 +203,44 @@ const styles = StyleSheet.create({
     margin: 10,
     textAlign: 'center',
     padding: 30,
-  },
-  AddDishesPagebutton: {
-    backgroundColor: "#004aad",
-    padding: 18,
-    borderRadius: 30,
-    marginTop: 20,
-  },
-  FillDishestext: {
-    color: "white",
-    fontSize: 14,
-    textAlign: 'center',
-  },
-  Filterbutton: {
-    backgroundColor: "#004aad",
-    padding: 15,
-    borderRadius: 5,
-    marginTop: 20,
-    width: 200,
-  },
-  arrow: {
-    fontSize: 18,
-    color: "white",
-  },
-  FilterbuttonText: {
-    color: "#fff",
-    fontSize: 18,
-  },
+  }, 
+
+
+  addDishButton: {
+  backgroundColor: '#004aad', 
+  paddingVertical: 12,
+  paddingHorizontal: 24,
+  borderRadius: 8,
+  marginTop: 20,
+},
+
+addDishButtonText: {
+  color: 'white',
+  fontSize: 16,
+  fontWeight: 'bold',
+  textAlign: 'center',
+},
+
+cancelButton: {
+   backgroundColor: '#004aad', 
+  paddingVertical: 12,
+  paddingHorizontal: 24,
+  borderRadius: 8,
+  marginTop: 20,
+},
+
+cancelButtonText: { 
+  color: 'white',
+  fontSize: 16,
+  fontWeight: 'bold',
+  textAlign: 'center',
+},
+
+
+
+
+
+
   input: {
     borderWidth: 1,
     borderColor: "#004aad",
