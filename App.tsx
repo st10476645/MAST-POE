@@ -79,7 +79,7 @@ export default function App() {
         <Text style={styles.WelcomeText}> Welcome, Christofell, let's plan together a well-balanced meal.</Text>
         <Text style={{ fontWeight: 'bold', marginTop: 20 }}> Click down below to add the dishes</Text> 
 
-        <TouchableOpacity style={styles.addDishButton}
+        <TouchableOpacity style={styles.addDishButton} 
         onPress={() => setModalVisible(true)}>
           <Text style={styles.addDishButtonText}>Add Dish</Text>
         </TouchableOpacity> 
